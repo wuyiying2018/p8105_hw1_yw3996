@@ -8,5 +8,14 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Problem 1
+Load the moderndive library:
+```{r}
+library("moderndive")
+```
+
+and use the following code to load the early_january_weather dataset:
+```{r}
+data("early_january_weather")
+```
 
