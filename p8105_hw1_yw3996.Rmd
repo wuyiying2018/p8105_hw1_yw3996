@@ -19,6 +19,7 @@ load the early_january_weather dataset:
 ```{r load_early_january_weather}
 data("early_january_weather")
 ```
+
 Here's a short description of the dataset:
 
 * the variables in this dataset includes origin (EWR), year (2013), month (Jan), day (ranges from 1 to 15), hour, temp, dewp, humid, wind_dir, wind_speed, wind_gust, precip, pressure, visib, and the time_hour. 
