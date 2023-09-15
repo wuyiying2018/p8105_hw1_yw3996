@@ -32,6 +32,7 @@ color points using the humid variable (by adding color = ... inside of aes in th
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
   geom_point()
 ```
+
 Here's a description of the plot:
 
 As time went by, the temperature had an increase tendency, the humidity also increased during Jan, 2013. 
