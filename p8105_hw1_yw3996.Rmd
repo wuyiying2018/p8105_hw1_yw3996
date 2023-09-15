@@ -16,18 +16,18 @@ library("moderndive")
 ```
 
 load the early_january_weather dataset:
-```{r}
+```{r load_early_january_weather}
 data("early_january_weather")
 ```
 Here's a short description of the dataset:
 
-* the variables in this dataset includes origin (EWR), year (2013), month (Jan), day (ranges from 1 to 15), hour, temp, dewp, humid, wind_dir, wind_speed, wind_gust, precip, pressure, visib, and the time_hour.  <span style="color: red;">**needs to be clarified**</span> 
+* the variables in this dataset includes origin (EWR), year (2013), month (Jan), day (ranges from 1 to 15), hour, temp, dewp, humid, wind_dir, wind_speed, wind_gust, precip, pressure, visib, and the time_hour. 
 * The dataset contains `r nrow(early_january_weather)` records on the weather in early January and `r ncol(early_january_weather)` variables.
 * The mean temperature is `r round(mean(early_january_weather$temp),2)`.
 
 Make a scatterplot of temp (y) vs time_hour (x); 
 color points using the humid variable (by adding color = ... inside of aes in the ggplot code). 
-```{r}
+```{r scatterplot}
 ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
   geom_point()
 ```
@@ -36,18 +36,18 @@ Here's a description of the plot:
 As time went by, the temperature had an increase tendency, the humidity also increased during Jan, 2013. 
 
 Export the scatterplot to the project directory using ggsave.
-```{r}
+```{r save_img}
 ggsave("p8105_hw1p1_scatterplot.pdf")
 ```
 
 # Problem 2
-The following code creates a data frame (**prb2_df**) comprised of:
+The following code creates a data frame (`prb2_df`) comprised of:
 
 * `samp`: a random sample of size 10 from a standard Normal distribution
 * `samp_pos`: a logical vector indicating whether elements of the sample are greater than 0
 * `char_vec`: a character vector of length 10
 * `factor_vec`: a factor vector of length 10, with 3 different factor “levels”
-```{r}
+```{r create_prb2_df}
 prb2_df <- tibble(
   samp = rnorm(10),
   samp_pos = samp > 0,
@@ -57,11 +57,22 @@ prb2_df <- tibble(
 ```
 
 Take the mean of each variable in the dataframe.
-```{r}
+```{r cal_mean}
 mean(pull(prb2_df,samp))
 mean(pull(prb2_df,samp_pos))
 mean(pull(prb2_df,char_vec))
 mean(pull(prb2_df,factor_vec))
 ```
 
-The numeric and logical variables (`samp` & `samp_pos`) work while the character and factor variables (`char_vec` & `factor_vec`) don't
+The numeric and logical variables (`samp` & `samp_pos`) work while the character and factor variables (`char_vec` & `factor_vec`) don't.
+
+Here's a code chunk that applies the as.numeric function to the logical, character, and factor variables
+```{r convert_numeric, results = "hide", warning=FALSE}
+as.numeric(pull(prb2_df,samp_pos))
+as.numeric(pull(prb2_df,char_vec))
+as.numeric(pull(prb2_df,factor_vec))
+```
+
+* For logical variables, they are converted to number 1 and 0. Therefore, the mean can be calculated.
+* For character variables, they are converted to NA, which means they can't be recognized as numbers. Therefore, it is impossible to calculate the mean.
+* For factor variables, they are converted to 1, 2, 3 according to the alphabetical order of the original factors (1 for "high", 2 for "low", and 3 for "medium"). However, these numbers make no sense because they fail to reflect the correct order of levels. Therefore, the mean of factor variables shouldn't be calculated because it can be very misleading.
