@@ -14,8 +14,12 @@ Load the moderndive library:
 library("moderndive")
 ```
 
-and use the following code to load the early_january_weather dataset:
+load the early_january_weather dataset:
 ```{r}
 data("early_january_weather")
 ```
+Here's a short description of the dataset:
 
+* the variables in this dataset includes origin (EWR), year (2013), month (Jan), day (ranges from 1 to 15), hour, temp, dewp, humid, wind_dir, wind_speed, wind_gust, precip, pressure, visib, and the time_hour.  <span style="color: red;">**need to be clarified**</span> 
+* The dataset contains `r nrow(early_january_weather)` records on the weather in early January and `r ncol(early_january_weather)` variables.
+* The mean temperature is `r round(mean(early_january_weather$temp),2)`.
